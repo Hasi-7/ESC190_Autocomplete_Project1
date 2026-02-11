@@ -7,7 +7,7 @@ void print_terms(struct term **terms, int *pnterms)
 {
     for (int i = 0; i < *pnterms; i++)
     {
-        printf("Term: %s, %d", (*terms + i)->term, (*terms + i)->weight);
+        printf("Term: %s\nTerm Weight: %d\n", (*terms + i)->term, (*terms + i)->weight);
     }
 }
 

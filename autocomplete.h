@@ -6,7 +6,7 @@ typedef struct term{
     double weight;
 } term;
 
-
+int compare(const void *term1, const void *term2);
 void read_in_terms(struct term **terms, int *pnterms, char *filename);
 int lowest_match(struct term *terms, int nterms, char *substr);
 int highest_match(struct term *terms, int nterms, char *substr);

@@ -3,28 +3,33 @@
 #include <stdlib.h>
 #include <string.h>
 
-int compare(struct term *term1, struct term *term2)
+int compare(const void *term1, const void *term2)
 {
-    return strcmp(term1->term, term2->term);
+    const term *cterm1 = (const term *)term1;
+    const term *cterm2 = (const term *)term2;
+    return strcmp(cterm1->term, cterm2->term);
 }
 
 void read_in_terms(struct term **terms, int *pnterms, char *filename)
 {
+    *pnterms = 0;
     *terms = (term *)malloc(sizeof(term)*(*pnterms));
     char line[200];
     FILE *fp = fopen(filename, "r"); 
-    for(int i = 0; i < *pnterms; i++)
+    int i = 0;
+    while (fgets(line, sizeof(line), fp) != NULL)
     { 
-        fgets(line, sizeof(line), fp);
         (*terms + i)->weight = atoi(line);
-        
         const char delimiter[2] = "\t";
         char *token;
         token = strtok(line, delimiter);
-        printf("Line: %s\n", token);
-        while (token != NULL) {
+        while (token != NULL) 
+        {
             token = strtok(NULL, delimiter);
         }
+        strcpy((*terms + i)->term, token);
+        i++;
+        
     } 
     fclose(fp);
     qsort(*terms, *pnterms, sizeof(terms), compare);
