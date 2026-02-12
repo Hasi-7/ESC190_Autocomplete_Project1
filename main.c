@@ -32,6 +32,8 @@ int main(void)
 
     print_terms(&answer, n_answer);
     //free allocated blocks here -- not required for the project, but good practice
+    free(terms);
+    free(answer);
     return 0;
 }
 
