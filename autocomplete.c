@@ -115,7 +115,7 @@ int compare_answers(const void *weight1, const void *weight2)
 {
     const term *cWeight1 = (const term *)weight1;
     const term *cWeight2 = (const term *)weight2;
-    return cWeight1->weight - cWeight2->weight;
+    return -(cWeight1->weight - cWeight2->weight);
 }
 
 void autocomplete(struct term **answer, int *n_answer, struct term *terms, int nterms, char *substr)

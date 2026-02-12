@@ -5,7 +5,7 @@
 
 void print_terms(struct term **terms, int nterms)
 {
-    for (int i = 0; i < nterms; i++)
+    for (int i = nterms-2; i < nterms; i++)
     {
         printf("Term: %s\nTerm Weight: %f\n", (*terms + i)->term, (*terms + i)->weight);
     }
@@ -19,12 +19,12 @@ int main(void)
     int match1 = lowest_match(terms, nterms, "Tor");
     if (match1 != -1)
     {
-        printf("Term: %s\n", (terms + match1)->term);
+        printf("Term: %s\nTerm Weight: %d\n", (terms + match1)->term, (terms + match1)->weight);
     }
     int match2 = highest_match(terms, nterms, "Tor");
     if (match2 != -1)
     {
-        printf("Term: %s\n", (terms + match2)->term);
+        printf("Term: %s\nTerm Weight: %d\n", (terms + match2)->term, (terms + match2)->weight);
     }
     struct term *answer;
     int n_answer;
