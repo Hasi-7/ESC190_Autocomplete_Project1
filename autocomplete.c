@@ -63,18 +63,12 @@ int binary_search(term **terms, int nterms, char *substr)
     int low = 0;
     int high = nterms - 1;
     int mid;
-    char *src = (char *)malloc(sizeof(strlen(substr)));
     int comparison;
     
     while (low <= high)
     {
         mid = (int) ((high + low) / 2);
-        // Uses the comparison function to compare a term in the block and a substr
-        strncpy(src, (*terms + mid)->term, strlen(substr) + 1);
         comparison = strncmp((*terms + mid)->term, substr, strlen(substr));
-        *(src + strlen(substr)) = '\0';
-        //comparison = (compare((const void *)(&substr), (const void *)(&(src))));
-        printf("%d, %s\n", comparison, src);
         if (comparison == 0) 
         {
             break;
@@ -97,7 +91,6 @@ int lowest_match(struct term *terms, int nterms, char *substr)
     while (strncmp((terms + best)->term, substr, strlen(substr)) == 0)
     {
         best--;
-        //printf("%d\n", best);
     }
     best++;
     return best;
