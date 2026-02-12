@@ -50,6 +50,7 @@ void read_in_terms(struct term **terms, int *pnterms, char *filename)
 
         if (temp != NULL)   
         {
+            temp[strcspn(temp, "\r\n")] = '\0';
             strcpy((*terms + i)->term, temp);
         }
 
