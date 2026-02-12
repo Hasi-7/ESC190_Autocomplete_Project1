@@ -16,12 +16,12 @@ int main(void)
     struct term *terms;
     int nterms;
     read_in_terms(&terms, &nterms, "cities.txt");
-    int match1 = lowest_match(terms, nterms, "Lud");
+    int match1 = lowest_match(terms, nterms, "Tor");
     if (match1 != -1)
     {
         printf("Term: %s\n", (terms + match1)->term);
     }
-    int match2 = highest_match(terms, nterms, "Lud");
+    int match2 = highest_match(terms, nterms, "Tor");
     if (match2 != -1)
     {
         printf("Term: %s\n", (terms + match2)->term);
