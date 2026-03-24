@@ -1,37 +1,29 @@
 #include "autocomplete.h"
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 
-void print_terms(struct term **terms, int nterms)
-{
-    for (int i = 0; i < 1; i++)
-    {
-        printf("Term: %s\nTerm Weight: %f\n", (*terms + i)->term, (*terms + i)->weight);
-    }
-}
-
-int main(void)
+int main(int argc, char **argv)
 {
     struct term *terms;
+    struct term *answer = NULL;
     int nterms;
-    read_in_terms(&terms, &nterms, "cities.txt");
-    int match1 = lowest_match(terms, nterms, "Tor");
-    if (match1 != -1)
-    {
-        printf("Term: %s\nTerm Weight: %d\n", (terms + match1)->term, (terms + match1)->weight);
-    }
-    int match2 = highest_match(terms, nterms, "Tor");
-    if (match2 != -1)
-    {
-        printf("Term: %s\nTerm Weight: %d\n", (terms + match2)->term, (terms + match2)->weight);
-    }
-    struct term *answer;
     int n_answer;
-    autocomplete(&answer, &n_answer, terms, nterms, "Kar");
+    int i;
 
-    print_terms(&answer, n_answer);
-    //free allocated blocks here -- not required for the project, but good practice
+    if (argc != 3)
+    {
+        fprintf(stderr, "Usage: %s <data-file> <prefix>\n", argv[0]);
+        return 1;
+    }
+
+    read_in_terms(&terms, &nterms, argv[1]);
+    autocomplete(&answer, &n_answer, terms, nterms, argv[2]);
+
+    for (i = 0; i < n_answer; i++)
+    {
+        printf("%.0lf %s\n", answer[i].weight, answer[i].term);
+    }
+
     free(terms);
     free(answer);
     return 0;
